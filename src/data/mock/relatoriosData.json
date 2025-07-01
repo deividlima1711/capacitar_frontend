@@ -1,0 +1,234 @@
+{
+  "empresas": [
+    {
+      "id": 1,
+      "nome": "TechCorp Solutions",
+      "setor": "Tecnologia"
+    },
+    {
+      "id": 2,
+      "nome": "Marketing Plus",
+      "setor": "Marketing"
+    }
+  ],
+  "processos": [
+    {
+      "id": 1,
+      "titulo": "Desenvolvimento do Sistema de Vendas",
+      "status": "em-andamento",
+      "responsavelId": 1,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-11-01",
+      "dataFim": "2024-12-15",
+      "prioridade": "alta",
+      "progresso": 75
+    },
+    {
+      "id": 2,
+      "titulo": "Campanha de Marketing Digital",
+      "status": "concluido",
+      "responsavelId": 3,
+      "empresaId": 2,
+      "setor": "Marketing",
+      "dataInicio": "2024-10-15",
+      "dataFim": "2024-11-30",
+      "prioridade": "media",
+      "progresso": 100
+    },
+    {
+      "id": 3,
+      "titulo": "Implementação do CRM",
+      "status": "atrasado",
+      "responsavelId": 2,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-09-01",
+      "dataFim": "2024-11-01",
+      "prioridade": "alta",
+      "progresso": 60
+    },
+    {
+      "id": 4,
+      "titulo": "Auditoria de Segurança",
+      "status": "pendente",
+      "responsavelId": 1,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-12-01",
+      "dataFim": "2024-12-31",
+      "prioridade": "alta",
+      "progresso": 0
+    },
+    {
+      "id": 5,
+      "titulo": "Redesign do Website",
+      "status": "em-andamento",
+      "responsavelId": 4,
+      "empresaId": 2,
+      "setor": "Design",
+      "dataInicio": "2024-11-15",
+      "dataFim": "2024-12-30",
+      "prioridade": "media",
+      "progresso": 40
+    }
+  ],
+  "tarefas": [
+    {
+      "id": 1,
+      "titulo": "Configurar banco de dados",
+      "status": "concluido",
+      "responsavelId": 1,
+      "processoId": 1,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-11-01",
+      "dataFim": "2024-11-05",
+      "prioridade": "alta",
+      "tempoEstimado": 16,
+      "tempoGasto": 14
+    },
+    {
+      "id": 2,
+      "titulo": "Desenvolver API de produtos",
+      "status": "em-andamento",
+      "responsavelId": 2,
+      "processoId": 1,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-11-06",
+      "dataFim": "2024-11-20",
+      "prioridade": "alta",
+      "tempoEstimado": 32,
+      "tempoGasto": 28
+    },
+    {
+      "id": 3,
+      "titulo": "Criar conteúdo para redes sociais",
+      "status": "concluido",
+      "responsavelId": 3,
+      "processoId": 2,
+      "empresaId": 2,
+      "setor": "Marketing",
+      "dataInicio": "2024-10-15",
+      "dataFim": "2024-10-25",
+      "prioridade": "media",
+      "tempoEstimado": 20,
+      "tempoGasto": 18
+    },
+    {
+      "id": 4,
+      "titulo": "Configurar Google Ads",
+      "status": "concluido",
+      "responsavelId": 3,
+      "processoId": 2,
+      "empresaId": 2,
+      "setor": "Marketing",
+      "dataInicio": "2024-10-26",
+      "dataFim": "2024-11-05",
+      "prioridade": "alta",
+      "tempoEstimado": 12,
+      "tempoGasto": 15
+    },
+    {
+      "id": 5,
+      "titulo": "Integração com sistema legado",
+      "status": "atrasado",
+      "responsavelId": 2,
+      "processoId": 3,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-09-15",
+      "dataFim": "2024-10-15",
+      "prioridade": "alta",
+      "tempoEstimado": 40,
+      "tempoGasto": 45
+    },
+    {
+      "id": 6,
+      "titulo": "Testes de penetração",
+      "status": "pendente",
+      "responsavelId": 1,
+      "processoId": 4,
+      "empresaId": 1,
+      "setor": "Tecnologia",
+      "dataInicio": "2024-12-01",
+      "dataFim": "2024-12-10",
+      "prioridade": "alta",
+      "tempoEstimado": 24,
+      "tempoGasto": 0
+    },
+    {
+      "id": 7,
+      "titulo": "Criar wireframes",
+      "status": "em-andamento",
+      "responsavelId": 4,
+      "processoId": 5,
+      "empresaId": 2,
+      "setor": "Design",
+      "dataInicio": "2024-11-15",
+      "dataFim": "2024-11-25",
+      "prioridade": "media",
+      "tempoEstimado": 16,
+      "tempoGasto": 8
+    },
+    {
+      "id": 8,
+      "titulo": "Implementar design responsivo",
+      "status": "pendente",
+      "responsavelId": 4,
+      "processoId": 5,
+      "empresaId": 2,
+      "setor": "Design",
+      "dataInicio": "2024-11-26",
+      "dataFim": "2024-12-15",
+      "prioridade": "media",
+      "tempoEstimado": 32,
+      "tempoGasto": 0
+    }
+  ],
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "João Silva",
+      "email": "joao@techcorp.com",
+      "cargo": "Desenvolvedor Senior",
+      "empresaId": 1,
+      "setor": "Tecnologia"
+    },
+    {
+      "id": 2,
+      "nome": "Maria Santos",
+      "email": "maria@techcorp.com",
+      "cargo": "Analista de Sistemas",
+      "empresaId": 1,
+      "setor": "Tecnologia"
+    },
+    {
+      "id": 3,
+      "nome": "Pedro Costa",
+      "email": "pedro@marketingplus.com",
+      "cargo": "Especialista em Marketing",
+      "empresaId": 2,
+      "setor": "Marketing"
+    },
+    {
+      "id": 4,
+      "nome": "Ana Oliveira",
+      "email": "ana@marketingplus.com",
+      "cargo": "Designer UX/UI",
+      "empresaId": 2,
+      "setor": "Design"
+    }
+  ],
+  "kpis": {
+    "taxaConclusao": 0.75,
+    "tempoMedioExecucao": 18.5,
+    "processosConcluidos": 1,
+    "processosAtrasados": 1,
+    "tarefasConcluidas": 3,
+    "tarefasAtrasadas": 1,
+    "produtividadeMedia": 0.85
+  }
+}
+
