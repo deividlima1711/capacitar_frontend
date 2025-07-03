@@ -1,11 +1,15 @@
-import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
+import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// URL da API vinda do ambiente (Vercel ou .env local)
+const API_URL = process.env.REACT_APP_API_URL;
 
-console.log('🧪 API_URL em produção:', process.env.REACT_APP_API_URL);
+if (!API_URL) {
+  throw new Error('❌ Variável REACT_APP_API_URL não foi definida. Verifique o .env ou o painel do Vercel.');
+}
 
+// Loga a URL base no modo desenvolvimento
 if (process.env.NODE_ENV === 'development') {
-  console.log('API base URL:', API_URL);
+  console.log('🔗 API base URL:', API_URL);
 }
 
 const api = axios.create({
@@ -16,44 +20,49 @@ const api = axios.create({
   },
 });
 
-// Interceptor para adicionar token automaticamente
+// Interceptor para adicionar o token JWT automaticamente
 api.interceptors.request.use(
-  (config: InternalAxiosRequestConfig) => {
+  (config: any) => {
     const token = localStorage.getItem('token');
     if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
+
     if (process.env.NODE_ENV === 'development') {
-      console.log('API Request:', config.method?.toUpperCase(), config.url);
+      console.log('➡️ API Request:', config.method?.toUpperCase(), config.url);
     }
+
     return config;
   },
-  (error: AxiosError) => {
+  (error: any) => {
     return Promise.reject(error);
   }
 );
 
-// Interceptor para tratar respostas
+// Interceptor para tratar as respostas da API
 api.interceptors.response.use(
-  (response: AxiosResponse) => {
+  (response: any) => {
     if (process.env.NODE_ENV === 'development') {
-      console.log('API Response:', response.status, response.config.url);
+      console.log('✅ API Response:', response.status, response.config.url);
     }
     return response;
   },
-  (error: AxiosError) => {
+  (error: any) => {
     if (process.env.NODE_ENV === 'development') {
-      console.log('API Error:', error.response?.status, error.config?.url, error.message);
+      console.log('❌ API Error:', error.response?.status, error.config?.url, error.message);
     }
+
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/login';
     }
+
     return Promise.reject(error);
   }
 );
 
+// Serviços da API organizados
 export const authAPI = {
   login: async (username: string, password: string) => {
     const response = await api.post('/auth/login', { username, password });
@@ -84,4 +93,3 @@ export const generalAPI = {
 };
 
 export default api;
-
