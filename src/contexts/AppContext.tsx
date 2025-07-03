@@ -2,6 +2,7 @@ import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { AppState, User, Processo, Tarefa, Notificacao, Estatisticas } from '../types';
 import { initializeSampleData, clearOrphanTarefas } from '../utils/sampleData';
+import { authAPI } from '../services/api';
 
 interface AppContextType extends AppState {
   setUser: (user: User | null) => void;
@@ -252,14 +253,20 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       dispatch({ type: 'DELETE_TAREFA', payload: id });
       saveToStorage('pf_tarefas', state.tarefas.filter(t => t.id !== id));
     },
-    addUsuario: (usuarioData) => {
-      const usuario: User = {
-        ...usuarioData,
-        id: Date.now(),
-        criadoEm: new Date().toISOString(),
-      };
-      dispatch({ type: 'ADD_USUARIO', payload: usuario });
-      saveToStorage('pf_usuarios', [...state.usuarios, usuario]);
+    addUsuario: async (usuarioData) => {
+      try {
+        // Chama o backend para criar o usuário
+        const response = await authAPI.register(
+          usuarioData.username,
+          '123456', // senha padrão temporária
+          usuarioData.email
+        );
+        // Atualiza a lista de usuários buscando do backend
+        const usuarios = await authAPI.getUsers();
+        dispatch({ type: 'LOAD_DATA', payload: { usuarios } });
+      } catch (error) {
+        console.error('Erro ao criar usuário via API:', error);
+      }
     },
     updateUsuario: (id, updates) => {
       dispatch({ type: 'UPDATE_USUARIO', payload: { id, updates } });

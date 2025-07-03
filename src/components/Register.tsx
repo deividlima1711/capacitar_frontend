@@ -4,6 +4,7 @@ import { authAPI } from '../services/api';
 const Register: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -13,12 +14,17 @@ const Register: React.FC = () => {
     e.preventDefault();
     setError('');
     setSuccess('');
+    if (password !== confirmPassword) {
+      setError('As senhas não coincidem.');
+      return;
+    }
     setLoading(true);
     try {
       await authAPI.register(username, password, email);
-      setSuccess('Usuário criado com sucesso! Faça login para acessar o sistema.');
+      setSuccess('Usuário criado! Verifique seu e-mail para confirmar o cadastro.');
       setUsername('');
       setPassword('');
+      setConfirmPassword('');
       setEmail('');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Erro ao criar usuário');
@@ -51,6 +57,14 @@ const Register: React.FC = () => {
         placeholder="Senha"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        required
+        style={{ width: '100%', marginBottom: 12, padding: 8 }}
+      />
+      <input
+        type="password"
+        placeholder="Confirme a senha"
+        value={confirmPassword}
+        onChange={e => setConfirmPassword(e.target.value)}
         required
         style={{ width: '100%', marginBottom: 20, padding: 8 }}
       />

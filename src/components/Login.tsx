@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { authAPI } from '../services/api';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 interface LoginProps {
@@ -11,6 +12,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -119,7 +121,7 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #d0d0d0', fontSize: 15 }}
             />
           </div>
-          <div className="form-group" style={{ marginBottom: 18 }}>
+          <div className="form-group" style={{ marginBottom: 8 }}>
             <label htmlFor="password" style={{ display: 'block', marginBottom: 6, color: '#333', fontWeight: 500 }}>Senha:</label>
             <input
               type="password"
@@ -130,6 +132,12 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               placeholder="Digite sua senha"
               style={{ width: '100%', padding: 10, borderRadius: 6, border: '1px solid #d0d0d0', fontSize: 15 }}
             />
+            <div style={{ marginTop: 4 }}>
+              <a href="#" style={{ color: '#1976d2', fontSize: 13, textDecoration: 'underline', cursor: 'pointer' }}
+                onClick={e => { e.preventDefault(); alert('Funcionalidade de recuperação de senha em breve!'); }}>
+                Esqueceu sua senha?
+              </a>
+            </div>
           </div>
           {error && <div className="error-message" style={{ color: '#d32f2f', marginBottom: 12, textAlign: 'center' }}>{error}</div>}
           <button type="submit" disabled={loading} className="login-button" style={{
@@ -149,10 +157,9 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
           </button>
         </form>
         <div className="demo-section" style={{ textAlign: 'center', marginTop: 8 }}>
-          <p style={{ margin: 0, fontSize: 14, color: '#888' }}>Demonstração:</p>
           <button 
             type="button" 
-            onClick={fillAdminCredentials}
+            onClick={() => navigate('/register')}
             className="demo-button"
             style={{
               margin: '8px 0 2px 0',
@@ -167,10 +174,8 @@ const Login: React.FC<LoginProps> = ({ onLoginSuccess }) => {
               transition: 'background 0.2s',
             }}
           >
-            Usar credenciais admin
+            Criar Login
           </button>
-          <br />
-          <small style={{ color: '#888' }}>admin / Lima12345</small>
         </div>
       </div>
     </div>
