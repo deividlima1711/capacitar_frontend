@@ -1,6 +1,8 @@
-import axios from 'axios';
+import axios, { AxiosError, AxiosResponse, InternalAxiosRequestConfig } from 'axios';
 
 const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+
+console.log('🧪 API_URL em produção:', process.env.REACT_APP_API_URL);
 
 if (process.env.NODE_ENV === 'development') {
   console.log('API base URL:', API_URL);
@@ -16,9 +18,9 @@ const api = axios.create({
 
 // Interceptor para adicionar token automaticamente
 api.interceptors.request.use(
-  (config) => {
+  (config: InternalAxiosRequestConfig) => {
     const token = localStorage.getItem('token');
-    if (token) {
+    if (token && config.headers) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     if (process.env.NODE_ENV === 'development') {
@@ -26,20 +28,20 @@ api.interceptors.request.use(
     }
     return config;
   },
-  (error) => {
+  (error: AxiosError) => {
     return Promise.reject(error);
   }
 );
 
 // Interceptor para tratar respostas
 api.interceptors.response.use(
-  (response) => {
+  (response: AxiosResponse) => {
     if (process.env.NODE_ENV === 'development') {
       console.log('API Response:', response.status, response.config.url);
     }
     return response;
   },
-  (error) => {
+  (error: AxiosError) => {
     if (process.env.NODE_ENV === 'development') {
       console.log('API Error:', error.response?.status, error.config?.url, error.message);
     }
