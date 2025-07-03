@@ -8,6 +8,7 @@ import Tarefas from './components/Tarefas/Tarefas';
 import Equipe from './components/Equipe/Equipe';
 import Relatorios from './components/Relatorios/Relatorios';
 import ModelosProcessos from './components/ModelosProcessos/ModelosProcessos';
+import Register from './components/Register';
 import { User } from './types';
 import './App.css';
 
@@ -21,6 +22,7 @@ const Configuracoes: React.FC = () => (
 const AppContent: React.FC = () => {
   const { user, setUser } = useApp();
   const [currentSection, setCurrentSection] = useState('dashboard');
+  const [showRegister, setShowRegister] = useState(false);
 
   // Verificar se há usuário logado ao inicializar
   useEffect(() => {
@@ -74,7 +76,24 @@ const AppContent: React.FC = () => {
   };
 
   if (!user) {
-    return <Login onLoginSuccess={handleLoginSuccess} />;
+    if (showRegister) {
+      return (
+        <>
+          <Register />
+          <div style={{textAlign: 'center', marginTop: 16}}>
+            <button onClick={() => setShowRegister(false)} style={{color: '#1976d2', background: 'none', border: 'none', cursor: 'pointer'}}>Já tem conta? Entrar</button>
+          </div>
+        </>
+      );
+    }
+    return (
+      <>
+        <Login onLoginSuccess={handleLoginSuccess} />
+        <div style={{textAlign: 'center', marginTop: 16}}>
+          <button onClick={() => setShowRegister(true)} style={{color: '#1976d2', background: 'none', border: 'none', cursor: 'pointer'}}>Criar nova conta</button>
+        </div>
+      </>
+    );
   }
 
   return (
