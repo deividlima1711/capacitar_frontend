@@ -1,7 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { AppState, User, Processo, Tarefa, Notificacao, Estatisticas } from '../types';
-import { initializeSampleData, clearOrphanTarefas } from '../utils/sampleData';
 import { authAPI } from '../services/api';
 
 interface AppContextType extends AppState {
@@ -137,9 +136,6 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   useEffect(() => {
     const loadData = () => {
       try {
-        initializeSampleData();
-        clearOrphanTarefas();
-
         const savedProcessos = localStorage.getItem('pf_processos');
         const savedTarefas = localStorage.getItem('pf_tarefas');
         const savedUsuarios = localStorage.getItem('pf_usuarios');
