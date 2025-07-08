@@ -114,7 +114,7 @@ const ModelosProcessos: React.FC = () => {
 
       {modelos.length === 0 ? (
         <div style={{ padding: 32, textAlign: 'center', color: '#888' }}>
-          Nenhum modelo de processo disponível. Aguarde integração com backend.
+          Nenhum modelo disponível. Integração com backend pendente.
         </div>
       ) : (
         currentView === 'list' && (
